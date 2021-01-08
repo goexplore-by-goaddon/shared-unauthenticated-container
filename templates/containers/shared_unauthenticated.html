@@ -37,7 +37,6 @@
 
             {% endif %}
           {% endfor %}
-
         {% endif %}
 
         <li class="nav-item">
@@ -56,17 +55,70 @@
   </div>
 </div>
 
-<footer class="footer mt-auto py-2 bg-dark">
-  <div class="container">
-    <p class="text-light pt-3">
-      {% assign footer_logo_url = "footer_logo.png" | image %}
-      {% if footer_logo_url != nil %}
-        <img src="{{ footer_logo_url }}" width="220">
-      {% elsif project.secrets.logo_title != nil %}
-        {{ project.secrets.logo_title }}
-      {% else %}
-        {{ project.name }}
-      {% endif %}
-    </p>
-  </div>
+<footer class="footer mt-auto pb-5 pt-4 bg-dark">
+   <div class="container">
+      <small class="text-light">
+         <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+               <div class="mt-4">
+                {% assign footer_logo_url = "footer_logo.png" | image %}
+                {% if footer_logo_url != nil %}
+                  <img src="{{ footer_logo_url }}" width="220">
+                {% elsif project.secrets.logo_title != nil %}
+                  {{ project.secrets.logo_title }}
+                {% else %}
+                  {{ project.name }}
+                {% endif %}
+               </div>
+            </div>
+            <div class="col-sm-0 col-md-1 col-lg-2"></div>
+
+            {% capture footer %}footer_{{ params.locale }}{% endcapture %}
+
+            {% if project.secrets[footer] != nil %}
+              <div class="col-sm-12 col-md-3 col-lg-2">
+                 <div class="mt-4">
+                    <h6 class="mb-4">{{ l.links }}</h6>
+                    <table>
+                      <tbody>
+                        {% assign footer_links = project.secrets[footer] | split: "," %}
+
+                        {% for footer_link in footer_links %}
+
+                          {% assign footer_elements = footer_link | split: ";" %}
+
+                          {% if footer_elements.size == 2 %}
+
+                            <tr>
+                               <td>
+                                  <div class="lead"><a class="text-light" href="{{ footer_elements[0] }}">{{ footer_elements[1] }}</a></div>
+                               </td>
+                            </tr>
+                          {% endif %}
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                 </div>
+              </div>
+            {% endif %}
+            {% if project.secrets.footer_about != nil %}
+              <div class="col-sm-12 col-md-4 col-lg-4 text-right">
+                 <div class="mt-4">
+                    <h6 class="mb-4">{{ l.about }}</h6>
+                    <address>
+                      {% assign footer_about_elements = project.secrets.footer_about | split: ";" %}
+                      {% for footer_about_element in footer_about_elements %}
+                        {% if footer_about_element == footer_about_elements[0] %}
+                          <b>{{ footer_about_element }}</b>
+                        {% else %}
+                          {{ footer_about_element }}
+                        {% endif %}
+                      {% endfor %}
+                    </address>
+                 </div>
+              </div>
+            {% endif %}
+         </div>
+      </small>
+   </div>
 </footer>

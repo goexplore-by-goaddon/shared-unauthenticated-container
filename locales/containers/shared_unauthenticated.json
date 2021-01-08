@@ -2,6 +2,8 @@
   "en": {
     "frontpage": "Frontpage",
     "sign_up": "Create account",
-    "sign_in": "Sign in"
+    "sign_in": "Sign in",
+    "links": "Links",
+    "about": "About"
   }
 }
