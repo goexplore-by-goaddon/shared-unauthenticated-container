@@ -64,10 +64,14 @@
                 {% assign footer_logo_url = "footer_logo.png" | image %}
                 {% if footer_logo_url != nil %}
                   <img src="{{ footer_logo_url }}" width="220">
-                {% elsif project.secrets.logo_title != nil %}
-                  {{ project.secrets.logo_title }}
                 {% else %}
-                  {{ project.name }}
+                  <h4>
+                    {% if project.secrets.logo_title != nil %}
+                      {{ project.secrets.logo_title }}
+                    {% else %}
+                      {{ project.name }}
+                    {% endif %}
+                  </h4>
                 {% endif %}
                </div>
             </div>
