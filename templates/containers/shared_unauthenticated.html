@@ -60,18 +60,14 @@
       <small class="text-light">
          <div class="row">
             <div class="col-sm-12 col-md-4 col-lg-4">
-               <div class="mt-4">
+               <div class="mt-4 navbar-brand">
                 {% assign footer_logo_url = "footer_logo.png" | image %}
                 {% if footer_logo_url != nil %}
                   <img src="{{ footer_logo_url }}" width="220">
+                {% elsif project.secrets.logo_title != nil %}
+                  {{ project.secrets.logo_title }}
                 {% else %}
-                  <h4>
-                    {% if project.secrets.logo_title != nil %}
-                      {{ project.secrets.logo_title }}
-                    {% else %}
-                      {{ project.name }}
-                    {% endif %}
-                  </h4>
+                  {{ project.name }}
                 {% endif %}
                </div>
             </div>
