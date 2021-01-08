@@ -18,6 +18,28 @@
         <li class="nav-item">
           <a class="nav-link lead" href="/{{ params.locale }}">{{ l.frontpage }}</a>
         </li>
+
+        {% capture top_menu %}top_menu_{{ params.locale }}{% endcapture %}
+
+        {% if project.secrets[top_menu] != nil %}
+
+          {% assign top_menu_links = project.secrets[top_menu] | split: "," %}
+
+          {% for top_menu_link in top_menu_links %}
+
+            {% assign top_menu_elements = top_menu_link | split: ";" %}
+
+            {% if top_menu_elements.size == 2 %}
+
+              <li class="nav-item">
+                <a class="nav-link lead" href="{{ top_menu_elements[0] | path_for }}">{{ top_menu_elements[0] }}</a>
+              </li>
+
+            {% endif %}
+          {% endfor %}
+
+        {% endif %}
+
         <li class="nav-item">
           <a class="nav-link lead" href="/{{ params.locale }}/users/sign_up">{{ l.sign_up }}</a>
         </li>
