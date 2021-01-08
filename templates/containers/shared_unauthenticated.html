@@ -78,7 +78,7 @@
             {% if project.secrets[footer_links_key] != nil %}
               <div class="col-sm-12 col-md-3 col-lg-2">
                  <div class="mt-4">
-                    <h6 class="mb-4">{{ l.links }}</h6>
+                    <div class="mb-4 lead">{{ l.links }}</div>
                     <table>
                       <tbody>
                         {% assign footer_links = project.secrets[footer_links_key] | split: "," %}
@@ -88,10 +88,9 @@
                           {% assign footer_elements = footer_link | split: ";" %}
 
                           {% if footer_elements.size == 2 %}
-
                             <tr>
                                <td>
-                                  <div class="lead"><a class="text-light" href="{{ footer_elements[0] | path_for }}">{{ footer_elements[1] }}</a></div>
+                                  <h6><a class="text-light" href="{{ footer_elements[0] | path_for }}">{{ footer_elements[1] }}</a></h6>
                                </td>
                             </tr>
                           {% endif %}
@@ -104,7 +103,7 @@
             {% if project.secrets.footer_about != nil %}
               <div class="col-sm-12 col-md-4 col-lg-4 text-right">
                  <div class="mt-4">
-                    <h6 class="mb-4">{{ l.about }}</h6>
+                    <div class="mb-4 lead">{{ l.about }}</div>
                     <address>
                       {% assign footer_about_elements = project.secrets.footer_about | split: ";" %}
                       {% for footer_about_element in footer_about_elements %}
