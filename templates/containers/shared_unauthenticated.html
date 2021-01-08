@@ -19,11 +19,11 @@
           <a class="nav-link lead" href="/{{ params.locale }}">{{ l.frontpage }}</a>
         </li>
 
-        {% capture top_menu %}top_menu_{{ params.locale }}{% endcapture %}
+        {% capture top_menu_links_key %}top_menu_links_{{ params.locale }}{% endcapture %}
 
-        {% if project.secrets[top_menu] != nil %}
+        {% if project.secrets[top_menu_links_key] != nil %}
 
-          {% assign top_menu_links = project.secrets[top_menu] | split: "," %}
+          {% assign top_menu_links = project.secrets[top_menu_links_key] | split: "," %}
 
           {% for top_menu_link in top_menu_links %}
 
@@ -73,15 +73,15 @@
             </div>
             <div class="col-sm-0 col-md-1 col-lg-2"></div>
 
-            {% capture footer %}footer_{{ params.locale }}{% endcapture %}
+            {% capture footer_links_key %}footer_links_{{ params.locale }}{% endcapture %}
 
-            {% if project.secrets[footer] != nil %}
+            {% if project.secrets[footer_links_key] != nil %}
               <div class="col-sm-12 col-md-3 col-lg-2">
                  <div class="mt-4">
                     <h6 class="mb-4">{{ l.links }}</h6>
                     <table>
                       <tbody>
-                        {% assign footer_links = project.secrets[footer] | split: "," %}
+                        {% assign footer_links = project.secrets[footer_links_key] | split: "," %}
 
                         {% for footer_link in footer_links %}
 
