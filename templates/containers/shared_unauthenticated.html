@@ -1,15 +1,19 @@
 <div class="w-100 flex-shrink-0">
   <nav class="navbar navbar-expand-lg navbar-light bg-white pb-3">
-    <a class="navbar-brand" href="/{{ params.locale }}">
-      {% assign top_menu_logo_url = "top_menu_logo.png" | image %}
-      {% if top_menu_logo_url != nil %}
+    {% assign top_menu_logo_url = "top_menu_logo.png" | image %}
+    {% if top_menu_logo_url != nil %}
+      <a href="/{{ params.locale }}">
         <img src="{{ top_menu_logo_url }}" width="220">
-      {% elsif project.secrets.logo_title != nil %}
-        {{ project.secrets.logo_title }}
-      {% else %}
-        {{ project.name }}
-      {% endif %}
-    </a>
+      </a>
+    {% else %}
+      <a class="navbar-brand" href="/{{ params.locale }}">
+        {% if project.secrets.logo_title != nil %}
+          {{ project.secrets.logo_title }}
+        {% else %}
+          {{ project.name }}
+        {% endif %}
+      </a>
+    {% endif %}
     <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -60,14 +64,18 @@
       <small class="text-light">
          <div class="row">
             <div class="col-sm-12 col-md-4 col-lg-4">
-               <div class="mt-4 navbar-brand">
+               <div class="mt-4">
                 {% assign footer_logo_url = "footer_logo.png" | image %}
                 {% if footer_logo_url != nil %}
                   <img src="{{ footer_logo_url }}" width="220">
-                {% elsif project.secrets.logo_title != nil %}
-                  {{ project.secrets.logo_title }}
                 {% else %}
-                  {{ project.name }}
+                  <span class="navbar-brand">
+                    {% if project.secrets.logo_title != nil %}
+                      {{ project.secrets.logo_title }}
+                    {% else %}
+                      {{ project.name }}
+                    {% endif %}
+                  </span>
                 {% endif %}
                </div>
             </div>
