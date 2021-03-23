@@ -1,5 +1,5 @@
 <div class="w-100 flex-shrink-0">
-  <nav class="navbar navbar-expand-lg navbar-light bg-white pb-3">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
     {% assign top_menu_logo_url = "top_menu_logo.png" | image %}
     {% if top_menu_logo_url != nil %}
       <a href="/{{ params.locale }}">
@@ -14,13 +14,13 @@
         {% endif %}
       </a>
     {% endif %}
-    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+    <button aria-controls="top_menu_nav" aria-expanded="false" aria-label="" class="navbar-toggler" data-bs-target="#top_menu_nav" data-bs-toggle="collapse" type="button">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
+    <div class="collapse navbar-collapse" id="top_menu_nav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link lead" href="/{{ params.locale }}">{{ l.frontpage }}</a>
+          <a class="nav-link" href="/{{ params.locale }}">{{ l.frontpage }}</a>
         </li>
 
         {% capture top_menu_links_key %}top_menu_links_{{ params.locale }}{% endcapture %}
@@ -36,7 +36,7 @@
             {% if top_menu_elements.size == 2 %}
 
               <li class="nav-item">
-                <a class="nav-link lead" href="{{ top_menu_elements[0] | path_for }}">{{ top_menu_elements[1] }}</a>
+                <a class="nav-link" href="{{ top_menu_elements[0] | path_for }}">{{ top_menu_elements[1] }}</a>
               </li>
 
             {% endif %}
@@ -44,10 +44,10 @@
         {% endif %}
 
         <li class="nav-item">
-          <a class="nav-link lead" href="/{{ params.locale }}/users/sign_up">{{ l.sign_up }}</a>
+          <a class="nav-link" href="/{{ params.locale }}/users/sign_up">{{ l.sign_up }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link lead" href="/{{ params.locale }}/users/sign_in">{{ l.sign_in }}</a>
+          <a class="nav-link" href="/{{ params.locale }}/users/sign_in">{{ l.sign_in }}</a>
         </li>
       </ul>
     </div>
@@ -86,7 +86,7 @@
             {% if project.secrets[footer_links_key] != nil %}
               <div class="col-sm-12 col-md-3 col-lg-2">
                  <div class="mt-4">
-                    <div class="mb-4 lead">{{ l.links }}</div>
+                    <div class="mb-4">{{ l.links }}</div>
                     <table>
                       <tbody>
                         {% assign footer_links = project.secrets[footer_links_key] | split: "," %}
@@ -109,9 +109,9 @@
               </div>
             {% endif %}
             {% if project.secrets.footer_about != nil %}
-              <div class="col-sm-12 col-md-4 col-lg-4 text-right">
+              <div class="col-sm-12 col-md-4 col-lg-4 text-end">
                  <div class="mt-4">
-                    <div class="mb-4 lead">{{ l.about }}</div>
+                    <div class="mb-4">{{ l.about }}</div>
                     <address>
                       {% assign footer_about_elements = project.secrets.footer_about | split: ";" %}
                       {% for footer_about_element in footer_about_elements %}
