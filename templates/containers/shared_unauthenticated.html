@@ -1,55 +1,57 @@
 <div class="w-100 flex-shrink-0">
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
-    {% assign top_menu_logo_url = "top_menu_logo.png" | image %}
-    {% if top_menu_logo_url != nil %}
-      <a href="/{{ params.locale }}">
-        <img src="{{ top_menu_logo_url }}" width="220">
-      </a>
-    {% else %}
-      <a class="navbar-brand" href="/{{ params.locale }}">
-        {% if project.secrets.logo_title != nil %}
-          {{ project.secrets.logo_title }}
-        {% else %}
-          {{ project.name }}
-        {% endif %}
-      </a>
-    {% endif %}
-    <button aria-controls="top_menu_nav" aria-expanded="false" aria-label="" class="navbar-toggler" data-bs-target="#top_menu_nav" data-bs-toggle="collapse" type="button">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="top_menu_nav">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="/{{ params.locale }}">{{ l.frontpage }}</a>
-        </li>
+    <div class="container-fluid">
+      {% assign top_menu_logo_url = "top_menu_logo.png" | image %}
+      {% if top_menu_logo_url != nil %}
+        <a href="/{{ params.locale }}">
+          <img src="{{ top_menu_logo_url }}" width="220">
+        </a>
+      {% else %}
+        <a class="navbar-brand" href="/{{ params.locale }}">
+          {% if project.secrets.logo_title != nil %}
+            {{ project.secrets.logo_title }}
+          {% else %}
+            {{ project.name }}
+          {% endif %}
+        </a>
+      {% endif %}
+      <button aria-controls="top_menu_nav" aria-expanded="false" aria-label="" class="navbar-toggler" data-bs-target="#top_menu_nav" data-bs-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="top_menu_nav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/{{ params.locale }}">{{ l.frontpage }}</a>
+          </li>
 
-        {% capture top_menu_links_key %}top_menu_links_{{ params.locale }}{% endcapture %}
+          {% capture top_menu_links_key %}top_menu_links_{{ params.locale }}{% endcapture %}
 
-        {% if project.secrets[top_menu_links_key] != nil %}
+          {% if project.secrets[top_menu_links_key] != nil %}
 
-          {% assign top_menu_links = project.secrets[top_menu_links_key] | split: "," %}
+            {% assign top_menu_links = project.secrets[top_menu_links_key] | split: "," %}
 
-          {% for top_menu_link in top_menu_links %}
+            {% for top_menu_link in top_menu_links %}
 
-            {% assign top_menu_elements = top_menu_link | split: ";" %}
+              {% assign top_menu_elements = top_menu_link | split: ";" %}
 
-            {% if top_menu_elements.size == 2 %}
+              {% if top_menu_elements.size == 2 %}
 
-              <li class="nav-item">
-                <a class="nav-link" href="{{ top_menu_elements[0] | path_for }}">{{ top_menu_elements[1] }}</a>
-              </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ top_menu_elements[0] | path_for }}">{{ top_menu_elements[1] }}</a>
+                </li>
 
-            {% endif %}
-          {% endfor %}
-        {% endif %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
 
-        <li class="nav-item">
-          <a class="nav-link" href="/{{ params.locale }}/users/sign_up">{{ l.sign_up }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/{{ params.locale }}/users/sign_in">{{ l.sign_in }}</a>
-        </li>
-      </ul>
+          <li class="nav-item">
+            <a class="nav-link" href="/{{ params.locale }}/users/sign_up">{{ l.sign_up }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/{{ params.locale }}/users/sign_in">{{ l.sign_in }}</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
   <div class="container-fluid">
